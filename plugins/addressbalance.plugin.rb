@@ -1,0 +1,22 @@
+require 'cinch'
+require 'curb-fu'
+require_relative 'getbalance.helper.rb'
+
+class AddressBalance
+	include Cinch::Plugin
+	match /addressbalance (E[1-9A-Za-z][^OIl]{20,40})/
+	match /balance (E[1-9A-Za-z][^OIl]{20,40})/
+	
+	include BalanceHelper
+	
+	set :help, <<-HELP
+!addressbalance <address>
+	Gets the current (confirmed) balance of an address
+!balance <address>
+	Gets the current (confirmed) balance of an address
+	HELP
+	
+	def execute(m, address)
+		m.reply get_balance(address)
+	end
+end

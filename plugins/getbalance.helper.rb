@@ -1,0 +1,9 @@
+require 'curb-fu'
+
+module BalanceHelper
+	def get_balance address
+		response = CurbFu.get("http://fedorachain.info/chain/Fedora/q/addressbalance/#{address}")
+		
+		response.body
+	end
+end
