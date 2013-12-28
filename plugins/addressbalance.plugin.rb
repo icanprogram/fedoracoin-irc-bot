@@ -1,6 +1,7 @@
 require 'cinch'
 require 'curb-fu'
 require_relative 'getbalance.helper.rb'
+require_relative '../include/coinslot.singleton.rb'
 
 class AddressBalance
 	include Cinch::Plugin
@@ -17,6 +18,8 @@ class AddressBalance
 	HELP
 	
 	def execute(m, address)
+		return if not CoinSlot.instance.check_coinslot(m)
+		
 		m.reply get_balance(address)
 	end
 end

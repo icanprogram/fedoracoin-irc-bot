@@ -1,5 +1,6 @@
 require 'cinch'
 require 'curb-fu'
+require_relative '../include/coinslot.singleton.rb'
 
 class BlockCount
 	include Cinch::Plugin
@@ -14,6 +15,8 @@ class BlockCount
 	HELP
 	
 	def execute(m)
+		return if not CoinSlot.instance.check_coinslot(m)
+		
 		response = CurbFu.get('http://fedorachain.info/chain/Fedora/q/getblockcount')
 		
 		m.reply response.body
