@@ -9,7 +9,7 @@ bot = Cinch::Bot.new do
 		c.realname = "ProgramBot"
 		c.server = "irc.freenode.org"
 		c.channels = ["#fedoracoin"]
-		c.plugins.plugins = [NetworkHash, Pools, BlockCount, Difficulty, AddressBalance, Credits, Help]
+		c.plugins.plugins = [NetworkHash, Pools, BlockCount, Difficulty, AddressBalance, ExchangeRate, Credits, Help]
 	end
 end
 
