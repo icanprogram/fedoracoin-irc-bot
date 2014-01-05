@@ -42,6 +42,6 @@ class CoinSlot
 	end
 	
 	def minimum
-		100
+		0
 	end
 end

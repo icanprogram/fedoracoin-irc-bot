@@ -15,7 +15,7 @@ class NetworkHash
 	def execute(m)
 		return if not CoinSlot.instance.check_coinslot(m)
 		
-		response = CurbFu.get('http://fedoracore.x64.me/index.php?page=api&action=public')
+		response = CurbFu.get('http://core.fedoracoin.net/index.php?page=api&action=public')
 		ret = JSON.parse(response.body)
 		
 		prefixes = ["k", "M", "G", "T", "P", "E", "Z", "Y"]
