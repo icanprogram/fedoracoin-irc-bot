@@ -7,11 +7,11 @@ class CoinSlot
 
 	def initialize
 		# Total balance this bot has gotten
-		@balance = get_balance(bot_address).to_i
+		@balance = get_receivedbyaddress(bot_address).to_i
 		@timer = Thread.new{
 			# Reset every two hours
 			while true do
-				@balance = get_balance(bot_address)
+				@balance = get_receivedbyaddress(bot_address).to_i
 				sleep(2 * 60 * 60)
 			end
 		}
@@ -32,7 +32,7 @@ class CoinSlot
 	
 	def needed_balance
 		# This is called mid hour
-		donations = get_balance(bot_address).to_i - @balance.to_i
+		donations = get_receivedbyaddress(bot_address).to_i - @balance.to_i
 		
 		return minimum - donations
 	end

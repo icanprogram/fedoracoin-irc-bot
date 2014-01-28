@@ -8,9 +8,11 @@ bot = Cinch::Bot.new do
 		c.nick = "ProgramBot"
 		c.realname = "ProgramBot"
 		c.server = "irc.freenode.org"
-		c.channels = ["#fedoracoin"]
-		c.plugins.plugins = [NetworkHash, Pools, BlockCount, Difficulty, AddressBalance, ExchangeRate, Credits, Help]
+		c.channels = ["#fedoracoin", "#TIPS"]
+		c.plugins.plugins = [NetworkHash, Pools, BlockCount, Difficulty, AddressBalance, ExchangeRate, Credits, Help, GiveGoldenEgg, Nodes]
 	end
 end
+
+Thread.new { RandomNumberGenerator.new(bot).start }
 
 bot.start

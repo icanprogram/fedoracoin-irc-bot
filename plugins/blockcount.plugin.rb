@@ -15,7 +15,7 @@ class BlockCount
 	HELP
 	
 	def execute(m)
-		return if not CoinSlot.instance.check_coinslot(m)
+		#return if not CoinSlot.instance.check_coinslot(m)
 		
 		response = CurbFu.get('http://fedorachain.info/chain/Fedora/q/getblockcount')
 		

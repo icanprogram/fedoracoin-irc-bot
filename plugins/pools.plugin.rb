@@ -1,7 +1,6 @@
 require 'cinch'
 require 'curb-fu'
 require 'json'
-require_relative '../include/coinslot.singleton.rb'
 
 class Pools
 	include Cinch::Plugin
@@ -13,12 +12,10 @@ class Pools
 	HELP
 	
 	def execute(m)
-		return if not CoinSlot.instance.check_coinslot(m)
-		
-		response = CurbFu.get('http://cphn.ml/res/pools.json')
+		response = CurbFu.get('http://fedoraco.in/pools.php')
 		pools = JSON.parse(response.body)
 		
-		m.reply "I know about the following pools (list maintained by Cephon on cphn.ml)"
+		m.reply "I know about the following pools (list maintained by tipsfedora on fedoraco.in)"
 		pools.each do |pool|
 			verified = pool['verified'] ? "yes" : "no"
 			m.reply "\t#{pool['name']}: fee #{pool['fee']}%, verified: #{verified}, url: #{pool['url']}"
