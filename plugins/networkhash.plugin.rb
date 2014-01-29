@@ -1,11 +1,14 @@
 require 'cinch'
 require 'curb-fu'
 require 'json'
+require_relative 'hashrateformatter.helper.rb'
 require_relative '../include/coinslot.singleton.rb'
 
 class NetworkHash
 	include Cinch::Plugin
 	match /hashrate/
+	
+	include HashrateFormatter
 	
 	set :help, <<-HELP
 !hashrate
@@ -15,22 +18,11 @@ class NetworkHash
 	def execute(m)
 		#return if not CoinSlot.instance.check_coinslot(m)
 		
-		response = CurbFu.get('http://core.fedoracoin.net/index.php?page=api&action=public')
+		response = CurbFu.get('http://chickenstrips.net//index.php?page=api&action=public')
 		ret = JSON.parse(response.body)
 		
-		prefixes = ["k", "M", "G", "T", "P", "E", "Z", "Y"]
+		hashrate = format_hashrate(ret['network_hashrate'])
 		
-		prefix = ""
-		unit = "h/s"
-		value = ret['network_hashrate'].to_f
-		
-		while value > 1000
-			value = value/1000
-			prefix = prefixes.shift
-		end
-		
-		value = value.round(2)
-		
-		m.reply "The current network hashrate is #{value} #{prefix}#{unit}"
+		m.reply "The current network hashrate is #{hashrate}"
 	end
 end
