@@ -17,8 +17,12 @@ class BlockCount
 	def execute(m)
 		#return if not CoinSlot.instance.check_coinslot(m)
 		
-		response = CurbFu.get('http://fedorachain.info/chain/Fedora/q/getblockcount')
+		response = CurbFu.get('http://chain.fedoraco.in/chain/FedoraCoin/q/getblockcount')
 		
-		m.reply response.body
+		if response.status.between?(200, 299)
+			m.reply response.body
+		else
+			m.reply "Sorry, there was an error with the request"
+		end
 	end
 end
